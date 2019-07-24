@@ -29,4 +29,5 @@ test:
     script:
         - docker-compose pull
         - docker-compose up --no-build tests
+    after_script:
         - docker-compose down
