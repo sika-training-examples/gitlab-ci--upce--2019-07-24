@@ -15,6 +15,18 @@ before_script:
 
 build:
     stage: build
+    variables:
+        COMPOSE_FILE: docker-compose.yml:docker-compose-test.yml
     script:
         - docker-compose build
         - docker-compose push
+
+test:
+    stage: test
+    variables:
+        COMPOSE_FILE: docker-compose.yml:docker-compose-test.yml
+        COMPOSE_PROJECT_NAME: $CI_JOB_ID
+    script:
+        - docker-compose pull
+        - docker-compose up --no-build tests
+        - docker-compose down
