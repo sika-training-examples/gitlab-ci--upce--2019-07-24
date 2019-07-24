@@ -45,3 +45,5 @@ deploy dev:
     script:
         - docker-compose pull
         - docker-compose up -d --no-build
+    after_script:
+        - sleep 10 && curl -fsSL https://$CI_PROJECT_PATH_SLUG-$CI_COMMIT_REF_SLUG.$BASE_HOST
