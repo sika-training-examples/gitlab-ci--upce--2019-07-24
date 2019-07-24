@@ -64,6 +64,7 @@ stop dev:
 deploy prod:
     only:
         - master
+    when: manual
     stage: deploy prod
     variables:
         DOCKER_HOST: tcp://$BASE_HOST:2376
@@ -73,7 +74,6 @@ deploy prod:
     environment:
         name: $PRODUCTION_HOST
         url: https://$PRODUCTION_HOST
-        on_stop: stop dev
     script:
         - docker-compose pull
         - docker-compose up -d --no-build
