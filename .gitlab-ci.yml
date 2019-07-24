@@ -41,6 +41,7 @@ deploy dev:
         DOCKER_HOST: tcp://$BASE_HOST:2376
         HOST: $CI_PROJECT_PATH_SLUG-$CI_COMMIT_REF_SLUG.$BASE_HOST
         COMPOSE_PROJECT_NAME: $CI_COMMIT_REF_SLUG
+        COMPOSE_FILE: docker-compose.yml:docker-compose-traefik.yml
     script:
         - docker-compose pull
         - docker-compose up -d --no-build
